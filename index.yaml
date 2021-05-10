@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  xcg:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-05-10T13:57:39.885849802+08:00"
+    description: A Helm chart for Kubernetes
+    digest: 9204a9c2c56b8d4cd1c6260ed22bf730b4279407a9aa3c9ca186e046acb9c3c1
+    name: xcg
+    type: application
+    urls:
+    - https://q357688537.github.io/xcg-chart/xcg-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-05-10T13:57:39.884029803+08:00"
