@@ -1,1 +1,33 @@
 namespace: game
+
+imagesRegistry: xiancaige
+
+core:
+  version: latest
+  port: 9999
+  replicas: 1
+
+gate:
+  version: latest
+  port: 19001
+  replicas: 1
+  
+system:
+  version: latest
+  port: 20001
+  replicas: 1
+
+db:
+  version: latest
+  port: 18001
+  replicas: 1
+
+battle:
+  version: latest
+  port: 8889
+  replicas: 1  
+
+chat:
+  version: latest
+  port: 15001
+  replicas: 1 

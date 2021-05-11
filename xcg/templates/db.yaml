@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: db
-  replicas: 1
+  replicas: {{ .Values.db.replicas }}
   template:
     metadata:
       labels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: db 
-        image: xiancaige/db:latest
+        image: {{ .Values.imagesRegistry }}/db:{{ .Values.db.version }}
         imagePullPolicy: Always
         ports:
-        - containerPort: 18001
+        - containerPort: {{ .Values.db.port }}

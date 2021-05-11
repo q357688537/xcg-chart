@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: chat
+  replicas: {{ .Values.chat.replicas }}
+  template:
+    metadata:
+      labels:
+        app: chat
+    spec:
+      containers:
+      - name: chat 
+        image: {{ .Values.imagesRegistry }}/chat:{{ .Values.chat.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.chat.port }}

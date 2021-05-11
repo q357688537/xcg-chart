@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: battle-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: battle
+  replicas: {{ .Values.battle.replicas }}
+  template:
+    metadata:
+      labels:
+        app: battle
+    spec:
+      containers:
+      - name: battle 
+        image: {{ .Values.imagesRegistry }}/battle:{{ .Values.battle.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.battle.port }}

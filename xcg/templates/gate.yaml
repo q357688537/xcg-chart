@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: gate
-  replicas: 1
+  replicas: {{ .Values.gate.replicas }}
   template:
     metadata:
       labels:
@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: gate 
-        image: xiancaige/gate:latest
+        image: {{ .Values.imagesRegistry }}/gate:{{ .Values.gate.version }}
         imagePullPolicy: Always
         ports:
-        - containerPort: 19001
+        - containerPort: {{ .Values.gate.port }}
+          
