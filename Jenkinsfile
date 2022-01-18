@@ -27,6 +27,7 @@ node ('chart-slave'){
 			}
 		}
 		
+		
 		result='成功'
 	} catch (Exception ex) {
 		result='失败'

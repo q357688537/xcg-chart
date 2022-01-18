@@ -19,4 +19,16 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.gate.port }}
-          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gate
+spec:
+  selector:
+    app: gate
+  ports:
+  - name: tcp-{{ .Values.gate.port }}
+    protocol: TCP
+    port: {{ .Values.gate.port }}
+    targetPort: {{ .Values.gate.port }}
