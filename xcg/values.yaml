@@ -22,12 +22,3 @@ db:
   port: 18001
   replicas: 1
 
-battle:
-  version: latest
-  port: 8889
-  replicas: 1  
-
-chat:
-  version: latest
-  port: 15001
-  replicas: 1 
