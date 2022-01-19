@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gate
+  name: gate-service
 spec:
   selector:
     app: gate
@@ -31,4 +31,5 @@ spec:
   - name: tcp-{{ .Values.gate.port }}
     protocol: TCP
     port: {{ .Values.gate.port }}
-    targetPort: {{ .Values.gate.port }}
+    nodePort: {{ .Values.gate.port }}
+  type: NodePort

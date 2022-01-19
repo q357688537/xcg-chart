@@ -9,7 +9,7 @@ core:
 
 gate:
   version: latest
-  port: 19001
+  port: 30001
   replicas: 1
   
 system:
@@ -26,4 +26,4 @@ mongo:
   version: 4.0
   port: 27017
   replicas: 1
-
+  hostname: tx

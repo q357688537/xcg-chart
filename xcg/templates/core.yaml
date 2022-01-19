@@ -19,3 +19,16 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.core.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-service
+spec:
+  selector:
+    app: core
+  ports:
+  - name: tcp-{{ .Values.core.port }}
+    protocol: TCP
+    port: {{ .Values.core.port }}
+    targetPort: {{ .Values.core.port }}
