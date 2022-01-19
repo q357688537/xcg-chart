@@ -11,18 +11,16 @@ node ('chart-slave'){
 				echo "performing build..."
 			}
 		}
-		stage('Helm') {
-			if(!auto){
-		
+		if(!auto){
+			stage('Helm') {		
 				container('helm-kubectl') {
 					echo "[INFO] Helm 打包..."
 					sh "helm package xcg"
 					echo "[INFO] Helm 打包成功."
 				}
 			}
-		}
-		stage('UpLoad') {
-			if(!auto){
+			
+			stage('UpLoad') {
 			   withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github', \
 											 keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
 					echo "[INFO] 上传"
@@ -36,7 +34,6 @@ node ('chart-slave'){
 				}
 			}
 		}
-		
 		
 		result='成功'
 	} catch (Exception ex) {

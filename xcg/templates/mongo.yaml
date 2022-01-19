@@ -1,3 +1,38 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-mongo
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: mongo-workspace
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/kubernetes/mongo"
+  nodeAffinity: 
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ali
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mongo
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: mongo-workspace
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,45 +56,9 @@ spec:
         - containerPort: {{ .Values.mongo.port }}
         volumeMounts:
         - name: pvc1
-        mountPath: /data/db
+          mountPath: /data/db
   volumes:
-  - name: pvc1
-    persistentVolumeClaim:
-      claimName: pvc-host 
+    - name: pvc1
+      persistentVolumeClaim:
+        claimName: pvc-mongo 
         
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-host
-  namespace: {{ .Values.namespace }}
-spec:
-  storageClassName: mongo-workspace
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data/kubernetes/mongo"
-  nodeAffinity: 
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - tx
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-host
-  namespace: {{ .Values.namespace }}
-spec:
-  storageClassName: mongo-workspace
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
