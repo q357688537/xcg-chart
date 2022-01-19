@@ -57,8 +57,8 @@ spec:
         volumeMounts:
         - name: pvc1
           mountPath: /data/db
-  volumes:
-    - name: pvc1
-      persistentVolumeClaim:
-        claimName: pvc-mongo 
+      volumes:
+      - name: pvc1
+        persistentVolumeClaim:
+          claimName: pvc-mongo 
         
