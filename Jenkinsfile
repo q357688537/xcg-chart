@@ -1,29 +1,39 @@
 node ('chart-slave'){
 	def result='';
+	def auto =false;
 	try{
 		stage('SCM') {
 			sh 'pwd'			
 			checkout scm
-			sh 'ls -a'			
+			def log = sh (script: "git log -1 | grep '自动化生成chart'", returnStatus: true) 
+			if (log == 0) {
+				auto=true
+				echo "performing build..."
+			}
 		}
 		stage('Helm') {
-			container('helm-kubectl') {
-				echo "[INFO] Helm 打包..."
-				sh "helm package xcg"
-				echo "[INFO] Helm 打包成功."
+			if(!auto){
+		
+				container('helm-kubectl') {
+					echo "[INFO] Helm 打包..."
+					sh "helm package xcg"
+					echo "[INFO] Helm 打包成功."
+				}
 			}
 		}
 		stage('UpLoad') {
-		   withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github', \
-										 keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
-				echo "[INFO] 上传"
-				sh 'cp ${SSH_KEY_FOR_ABC} ~/.ssh/id_rsa'
-				sh 'git config user.email "Jenkins-Robot@example.com"'
-				sh 'git config user.name "Jenkins-Robot"'
-				sh 'git add -A'
-				sh "git commit -m '自动化生成chart'"
-				sh 'git push origin HEAD:main'
-				echo "[INFO] 上传成功."
+			if(!auto){
+			   withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github', \
+											 keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
+					echo "[INFO] 上传"
+					sh 'cp ${SSH_KEY_FOR_ABC} ~/.ssh/id_rsa'
+					sh 'git config user.email "Jenkins-Robot@example.com"'
+					sh 'git config user.name "Jenkins-Robot"'
+					sh 'git add -A'
+					sh "git commit -m '自动化生成chart'"
+					sh 'git push origin HEAD:main'
+					echo "[INFO] 上传成功."
+				}
 			}
 		}
 		

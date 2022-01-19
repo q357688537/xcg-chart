@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  replicas: {{ .Values.mongo.replicas }}
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo 
+        image: mongo:{{ .Values.mongo.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.mongo.port }}
+        volumeMounts:
+        - name: pvc1
+        mountPath: /data/db
+  volumes:
+  - name: pvc1
+    persistentVolumeClaim:
+      claimName: pvc-host 
+        
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-host
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: mongo-workspace
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/kubernetes/mongo"
+  nodeAffinity: 
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - tx
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-host
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: mongo-workspace
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
