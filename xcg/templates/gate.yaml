@@ -19,6 +19,14 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.gate.port }}
+        env:
+        - name: "CORE.IP"
+          value: "{{ .Values.core.ip }}"
+        - name: "CORE.PORT"
+          value: "{{ .Values.core.port }}"
+        - name: "PORT"
+          value: "{{ .Values.gate.port }}"
+
 ---
 apiVersion: v1
 kind: Service

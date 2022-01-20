@@ -19,3 +19,10 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.system.port }}
+        env:
+        - name: "CORE.IP"
+          value: "{{ .Values.core.ip }}"
+        - name: "CORE.PORT"
+          value: "{{ .Values.core.port }}"
+        - name: "PORT"
+          value: "{{ .Values.system.port }}"

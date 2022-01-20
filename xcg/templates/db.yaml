@@ -18,4 +18,15 @@ spec:
         image: {{ .Values.imagesRegistry }}/db:{{ .Values.db.version }}
         imagePullPolicy: Always
         ports:
-        - containerPort: {{ .Values.db.port }}
+        - containerPort: {{ .Values.db.rpc_port }}
+        env:
+        - name: "CORE.IP"
+          value: "{{ .Values.core.ip }}"
+        - name: "CORE.PORT"
+          value: "{{ .Values.core.port }}"
+        - name: "MONGO.IP"
+          value: "{{ .Values.mongo.ip }}"
+        - name: "MONGO.PORT"
+          value: "{{ .Values.mongo.port }}"
+        - name: "RPC.PORT"
+          value: "{{ .Values.db.rpc_port }}"

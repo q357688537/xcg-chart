@@ -3,6 +3,7 @@ namespace: game
 imagesRegistry: xiancaige
 
 core:
+  ip: core-service.game.svc.cluster.local
   version: latest
   port: 9999
   replicas: 1
@@ -16,14 +17,19 @@ system:
   version: latest
   port: 20001
   replicas: 1
-
+  ip: 127.0.0.1
+  battle_port_min: 37001
+  battle_port_max: 38000
+  game_player_num: 1
+  
 db:
   version: latest
-  port: 18001
+  rpc_port: 18001
   replicas: 1
   
 mongo:
+  ip: mongo-service.game.svc.cluster.local
   version: 4.0
   port: 27017
   replicas: 1
-  hostname: tx
+  hostname: ali

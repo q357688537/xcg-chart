@@ -19,6 +19,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.core.port }}
+        env:
+        - name: "PORT"
+          value: "{{ .Values.core.port }}"
 ---
 apiVersion: v1
 kind: Service
