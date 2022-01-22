@@ -3,7 +3,7 @@ namespace: game
 imagesRegistry: xiancaige
 
 core:
-  ip: core-service.game.svc.cluster.local
+  ip: core-service
   version: latest
   port: 9999
   replicas: 1
@@ -28,7 +28,7 @@ db:
   replicas: 1
   
 mongo:
-  ip: mongo-service.game.svc.cluster.local
+  ip: mongo-service
   version: 4.0
   port: 27017
   replicas: 1
