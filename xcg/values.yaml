@@ -17,9 +17,9 @@ system:
   version: latest
   port: 20001
   replicas: 1
-  ip: 127.0.0.1
-  battle_port_min: 37001
-  battle_port_max: 38000
+  ip: system-service
+  battle_port_min: 31001
+  battle_port_max: 32000
   game_player_num: 1
   
 db:
@@ -33,3 +33,8 @@ mongo:
   port: 27017
   replicas: 1
   hostname: ali
+
+  
+battleMgr:
+  accoutName: battle-mgr-ac
+

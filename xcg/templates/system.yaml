@@ -13,6 +13,7 @@ spec:
       labels:
         app: system
     spec:
+      serviceAccountName: {{ .Values.battleMgr.accoutName }}
       containers:
       - name: system 
         image: {{ .Values.imagesRegistry }}/system:{{ .Values.system.version }}
@@ -26,3 +27,50 @@ spec:
           value: "{{ .Values.core.port }}"
         - name: "PORT"
           value: "{{ .Values.system.port }}"
+        - name: "MY_IP"
+          value: "{{ .Values.system.ip }}"
+        - name: "K8S_BATTLE"
+          value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: system-service
+spec:
+  selector:
+    app: system
+  ports:
+  - name: tcp-{{ .Values.system.port }}
+    protocol: TCP
+    port: {{ .Values.system.port }}
+    targetPort: {{ .Values.system.port }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.battleMgr.accoutName }}
+  namespace: {{ .Values.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Values.battleMgr.accoutName }}-role
+  namespace: {{ .Values.namespace }}
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"] 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ .Values.battleMgr.accoutName }}-rolebinding
+  namespace: {{ .Values.namespace }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.battleMgr.accoutName }}
+  namespace: {{ .Values.namespace }}
+roleRef:
+  kind: Role
+  name: {{ .Values.battleMgr.accoutName }}-role
+  apiGroup:  rbac.authorization.k8s.io
