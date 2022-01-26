@@ -31,6 +31,12 @@ spec:
           value: "{{ .Values.system.ip }}"
         - name: "K8S_BATTLE"
           value: "true"
+        - name: "BATTLE_PORT_MIN"
+          value: "{{ .Values.system.battle_port_min }}"
+        - name: "BATTLE_PORT_MAX"
+          value: "{{ .Values.system.battle_port_max }}"
+        - name: "GAME_PLAYER_NUM"
+          value: "{{ .Values.system.game_player_num }}"
 ---
 apiVersion: v1
 kind: Service
