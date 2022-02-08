@@ -1,12 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: gate-deployment
+  name: gate-statefulset
   namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
       app: gate
+  serviceName: gate-service  
   replicas: {{ .Values.gate.replicas }}
   template:
     metadata:

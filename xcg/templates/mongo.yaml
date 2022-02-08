@@ -34,14 +34,15 @@ spec:
       storage: 10Gi
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: mongo-deployment
+  name: mongo-statefulset
   namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
       app: mongo
+  serviceName: mongo-service  
   replicas: {{ .Values.mongo.replicas }}
   template:
     metadata:
