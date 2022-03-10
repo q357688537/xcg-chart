@@ -38,6 +38,9 @@ spec:
           value: "{{ .Values.system.battle_port_max }}"
         - name: "GAME_PLAYER_NUM"
           value: "{{ .Values.system.game_player_num }}"
+        - name: "BATTLE_IP"
+          value: "{{ .Values.system.battle_ip }}"
+          
 ---
 apiVersion: v1
 kind: Service

@@ -21,6 +21,7 @@ system:
   battle_port_min: 31001
   battle_port_max: 32000
   game_player_num: 1
+  battle_ip: 101.33.244.181
   
 db:
   version: latest
@@ -32,7 +33,7 @@ mongo:
   version: 4.0
   port: 27017
   replicas: 1
-  hostname: ali
+  hostname: tx3
 
   
 battleMgr:
