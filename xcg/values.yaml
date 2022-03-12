@@ -38,4 +38,5 @@ mongo:
   
 battleMgr:
   accoutName: battle-mgr-ac
-
+  battleImage: ue_ds
+  battleVersion: beta
