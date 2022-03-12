@@ -20,7 +20,7 @@ system:
   ip: system-service
   battle_port_min: 31001
   battle_port_max: 32000
-  game_player_num: 1
+  game_player_num: 2
   battle_ip: 101.33.244.181
   
 db:
