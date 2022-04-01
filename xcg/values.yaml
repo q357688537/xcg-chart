@@ -40,3 +40,6 @@ battleMgr:
   accoutName: battle-mgr-ac
   battleImage: ue-ds
   battleVersion: beta
+
+battle:
+  hostname: tx3

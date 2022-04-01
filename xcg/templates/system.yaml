@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -85,3 +86,38 @@ roleRef:
   kind: Role
   name: {{ .Values.battleMgr.accoutName }}-role
   apiGroup:  rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-battle
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: battle-workspace
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/kubernetes/battle"
+  nodeAffinity: 
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - {{ .Values.battle.hostname }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-battle
+  namespace: {{ .Values.namespace }}
+spec:
+  storageClassName: battle-workspace
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
