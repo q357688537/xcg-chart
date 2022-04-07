@@ -14,8 +14,8 @@ node ('chart-slave'){
 		if(!auto){
 			stage('Helm') {		
 				container('helm-kubectl') {
-					echo "[INFO] Helm clean..."
-					sh "rm -rf xcg-*.tgz"
+				//	echo "[INFO] Helm clean..."
+				//	sh "rm -rf xcg-*.tgz"
 					echo "[INFO] Helm 打包..."
 					sh "helm package xcg"
 					echo "[INFO] Helm 打包成功."
