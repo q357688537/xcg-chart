@@ -3,12 +3,22 @@ entries:
   xcg:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-05-10T13:57:39.885849802+08:00"
+    created: "2022-04-07T06:52:14.989997514Z"
     description: A Helm chart for Kubernetes
-    digest: 9204a9c2c56b8d4cd1c6260ed22bf730b4279407a9aa3c9ca186e046acb9c3c1
+    digest: 3c8b318abc3e0b4724cc4b379f7d1935270b194c4bef9023aa9e8c05f5436a4c
+    name: xcg
+    type: application
+    urls:
+    - https://xiancaige.github.io/xcg-chart/xcg-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-07T06:52:14.989328132Z"
+    description: A Helm chart for Kubernetes
+    digest: 05087e1d752b43d914d4a38782336b1e77d826bb657c6e7b1a147873490748c9
     name: xcg
     type: application
     urls:
     - https://xiancaige.github.io/xcg-chart/xcg-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-10T13:57:39.884029803+08:00"
+generated: "2022-04-07T06:52:14.988826202Z"
