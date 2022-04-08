@@ -18,7 +18,8 @@ node ('chart-slave'){
 				//	sh "rm -rf xcg-*.tgz"
 					echo "[INFO] Helm 打包..."
 					sh "helm package xcg"
-					sh "helm repo index . --merge index.yaml --url https://xiancaige.github.io/xcg-chart" 
+					sh "mv xcg-*.tgz repository/"
+					sh "helm repo index ./repository --merge repository/index.yaml --url https://xiancaige.github.io/xcg-chart/repository" 
 					echo "[INFO] Helm 打包成功."
 				}
 			}
