@@ -39,7 +39,7 @@ mongo:
 battleMgr:
   accoutName: battle-mgr-ac
   battleImage: ue-ds
-  battleVersion: beta
+  battleVersion: ue5
 
 battle:
   hostname: tx3
