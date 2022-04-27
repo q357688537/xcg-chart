@@ -42,7 +42,7 @@ spec:
         - name: "BATTLE_IP"
           value: "{{ .Values.system.battle_ip }}"
         - name: "BATTLE_IMAGE" 
-          value: "{{ .Values.imagesRegistry }}/{{ .Values.battleMgr.battleImage }}:{{ .Values.battleMgr.battleVersion }}"
+          value: "{{ .Values.imagesRegistry }}/{{ .Values.battleMgr.battleImage }}"
 ---
 apiVersion: v1
 kind: Service
